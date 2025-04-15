@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Insecure Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #fff4f4; padding: 20px; display: flex; justify-content: space-between; }
+        .form-area, .code-area { width: 48%; }
+        form { background: #ffe5e5; padding: 20px; border-radius: 10px; }
+        input, button { margin-top: 10px; width: 100%; }
+        pre { background: #fdf6c9; padding: 10px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div class="form-area">
+        <h2>Insecure Login</h2>
+        {% if success %}
+            <p style="color:green;">✅ Login Successful!</p>
+            <a href="/logout"><button>Sign Out</button></a>
+        {% else %}
+            <form method="POST">
+                <label>Username:</label><br>
+                <input type="text" name="username" required><br>
+                <label>Password:</label><br>
+                <input type="password" name="password" required><br>
+                <button type="submit">Login</button>
+            </form>
+            {% if error %}
+                <p style="color:red;">{{ error }}</p>
+            {% endif %}
+        {% endif %}
+        <a href="/login-secure">Try Secure Login Instead</a><br>
+        <a href="/comparison">View Side-by-Side Comparison</a>
+    </div>
+
+    {% if success %}
+    <div class="code-area">
+        <h3>Insecure Code Snippet</h3>
+        <pre>
+# Plaintext comparison — not secure
+if username in users and
+   users[username]['password_plain'] == password:
+    success = True
+        </pre>
+    </div>
+    {% endif %}
+</body>
+</html>

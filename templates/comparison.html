@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Insecure vs Secure Comparison</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px; }
+        .container { display: flex; justify-content: space-between; }
+        .box { width: 48%; padding: 20px; border-radius: 10px; }
+        .insecure { background: #ffe5e5; }
+        .secure { background: #e5f1ff; }
+        pre { background: #fff; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Side-by-Side Comparison</h2>
+    <div class="container">
+        <div class="box insecure">
+            <h3>❌ Insecure Authentication</h3>
+            <pre>
+# Plaintext comparison — not secure
+if username in users and
+   users[username]['password_plain'] == password:
+    success = True
+            </pre>
+            <ul>
+                <li>Passwords stored in plaintext</li>
+                <li>Vulnerable to data leaks</li>
+                <li>Violates OWASP best practices</li>
+            </ul>
+        </div>
+
+        <div class="box secure">
+            <h3>✅ Secure Authentication</h3>
+            <pre>
+# Hashed comparison — secure
+if username in users and
+   bcrypt.checkpw(password,
+   users[username]['password_hashed']):
+    success = True
+            </pre>
+            <ul>
+                <li>Passwords hashed with bcrypt</li>
+                <li>Follows OWASP/NIST guidelines</li>
+                <li>Prevents reverse-engineering</li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <a href="/" style="text-decoration:none;">
+        <button style="padding:10px 20px; font-size:16px;">⬅ Back to Login</button>
+    </a>
+
+</body>
+</html>

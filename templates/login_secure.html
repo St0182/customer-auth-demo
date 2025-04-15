@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secure Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4faff; padding: 20px; display: flex; justify-content: space-between; }
+        .form-area, .code-area { width: 48%; }
+        form { background: #e5f1ff; padding: 20px; border-radius: 10px; }
+        input, button { margin-top: 10px; width: 100%; }
+        pre { background: #d8f5df; padding: 10px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div class="form-area">
+        <h2>Secure Login</h2>
+        {% if success %}
+            <p style="color:green;">✅ Login Successful!</p>
+            <a href="/logout"><button>Sign Out</button></a>
+        {% else %}
+            <form method="POST">
+                <label>Username:</label><br>
+                <input type="text" name="username" required><br>
+                <label>Password:</label><br>
+                <input type="password" name="password" required><br>
+                <button type="submit">Login</button>
+            </form>
+            {% if error %}
+                <p style="color:red;">{{ error }}</p>
+            {% endif %}
+        {% endif %}
+        <a href="/login-insecure">Try Insecure Login Instead</a><br>
+        <a href="/comparison">View Side-by-Side Comparison</a>
+    </div>
+
+    {% if success %}
+    <div class="code-area">
+        <h3>Secure Code Snippet</h3>
+        <pre>
+# Hashed comparison — secure
+if username in users and
+   bcrypt.checkpw(password,
+   users[username]['password_hashed']):
+    success = True
+        </pre>
+    </div>
+    {% endif %}
+</body>
+</html>
